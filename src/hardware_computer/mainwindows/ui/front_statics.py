@@ -6,11 +6,14 @@ class FrontStatics:
 
     def __init__(self):
         self.cores = Cores()
+
     def text_processador(self):
         
         return Text(
             "PROCESSADOR", 
-            size=14, 
+            size=25, 
             weight=FontWeight.W_600,
-            color=self.cores.get_cor_branca()
+            color=self.cores.get_cor_branca(),
+            
             )
+        
