@@ -6,26 +6,22 @@ from core.ultils.pag import Pagina
 from mainwindows.manager import Manager
 
 class Assicrono:
+
+    def __init__(self):
+
+        #def __meu_loop()
+        self.var_manager = Manager()
     
        
     def sistema_assincrono(self):
 
-        self.var_manager = Manager()
-
-        
-        
-        
         self.__ativar_loop()
-        
-        
-       
+    
     # Função assíncrona para o loop em segundo plano
     async def __meu_loop(self):
-        contador = 0
+        
         while True:
             
-            contador += 1
-           
             self.var_manager.gerenciar_pagina()
            
             # Pausa assíncrona para não travar a interface

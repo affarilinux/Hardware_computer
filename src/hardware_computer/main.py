@@ -2,9 +2,9 @@ from flet import run, Page
 
 from core.ultils.pag import Pagina
 
-#views
-from views.index_ import Index
-from views.padrao_pagina import PadraoPagina
+#center
+from center.index_ import Index
+from center.padrao_pagina import PadraoPagina
 
 class AppMain:
     """
@@ -13,6 +13,11 @@ class AppMain:
 
     def __init__(self, page: Page) -> None:
         self.pageinit = page
+        
+        #def pagina_init()
+        self.ct_class_padrao_pagina = PadraoPagina()
+        self.ct_class_index = Index()
+
         self.pagina_init()
 
         self.pageinit.update()
@@ -21,15 +26,12 @@ class AppMain:
 
         Pagina.setpag(self.pageinit)
         
-
-        var_padrao_pagina = PadraoPagina()
-        var_padrao_pagina.tamanho_tela(self.pageinit)
-        var_padrao_pagina.cor_fundo_pagina(self.pageinit)
+        self.ct_class_padrao_pagina.tamanho_tela(self.pageinit)
+        self.ct_class_padrao_pagina.cor_fundo_pagina(self.pageinit)
 
         self.pageinit.update()
 
-        var_index = Index()
-        var_index.sistema_asyncio()
+        self.ct_class_index.sistema()
 
         
 

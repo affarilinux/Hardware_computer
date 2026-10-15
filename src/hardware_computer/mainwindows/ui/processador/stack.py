@@ -1,6 +1,14 @@
 from flet import Text,FontWeight,Stack,ProgressRing,Container,Alignment
 from dataclasses import dataclass
+
+#mainwindows.core
 from mainwindows.core.cores import Cores
+
+#mainwindows.front_enter
+from mainwindows.front_enter import FrontEnter
+
+#core.ultils
+from core.ultils.pag import Pagina
 
 @dataclass
 class config:
@@ -8,46 +16,68 @@ class config:
     
     width : int = CENTO_E_TRINTA
     height : int = CENTO_E_TRINTA
-    
-class StackProcessador:
+
+
+class StackProcessadorWidget:
 
     def __init__(self):
+
+        self.WDG_STACK = Stack()
+
+        #config
+        self.MW_CLASS_DC_CONFIG = config()
+        #cores
         self.cores = Cores()
-        self.config_class = config()
-    
-    def widget_processador_widget(self):
+
+        self.ativar_funcoes()
+
+
+    def ativar_funcoes(self):
+        self.__controls()
+
+    def __controls(self):
+
+        self.WDG_STACK.controls = [
+            self.__progresso(),
+            self.__container(),
+        ]
         
-        self.stack = Stack(
-            controls=[
-                self.__progresso(),
-                Container(
-                    content=self.__texto(),
-                    width=self.config_class.width,
-                    height=self.config_class.height,
-                    alignment=Alignment.CENTER,
-                ),
-            ]
+    def __progresso(self):
+        self.WDG_CLASS_PROGRESSRING = ProgressRing(
+        value=0.75,       # 75%
+        width=self.MW_CLASS_DC_CONFIG.width,
+        height=self.MW_CLASS_DC_CONFIG.height,
+        stroke_width=8,
         )
-            
+
+        return self.WDG_CLASS_PROGRESSRING
+
+    def __container(self):
+        return Container(
+            content=self.__texto(),
+            width=self.MW_CLASS_DC_CONFIG.width,
+            height=self.MW_CLASS_DC_CONFIG.height,
+            alignment=Alignment.CENTER,
+        )
 
     def __texto(self):
-        return Text(
-            "100.00 %",
+        self.WDG_CLASS_TEXT = Text(
+           
             weight=FontWeight.W_900, #grosura da letra
             color=self.cores.get_cor_branca(),
             size=25 # tamanho da letra
             
         )
 
-    def __progresso(self):
-        
-        return ProgressRing(
-        value=0.75,       # 75%
-        width=self.config_class.width,
-        height=self.config_class.height,
-        stroke_width=8,
-        )
+        return self.WDG_CLASS_TEXT
 
+    
+class StackProcessador(StackProcessadorWidget):
+    
     def get_stack(self):
-        return self.stack
-        
+        return self.WDG_STACK
+
+    def set_calculo(self, valor):
+
+        self.WDG_CLASS_TEXT.value = valor
+        Pagina.getpag().update()

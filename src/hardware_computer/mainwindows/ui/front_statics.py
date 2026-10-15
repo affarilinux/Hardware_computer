@@ -1,11 +1,11 @@
 from flet import Text, FontWeight
 
-from mainwindows.core.cores import Cores
+from mainwindows.core.mw_class_cores import mw_class_cores
 
 class FrontStatics:
 
     def __init__(self):
-        self.cores = Cores()
+        self.mw_class_cores = mw_class_cores()
 
     def text_processador(self):
         
@@ -13,7 +13,7 @@ class FrontStatics:
             "PROCESSADOR", 
             size=25, 
             weight=FontWeight.W_600,
-            color=self.cores.get_cor_branca(),
+            color=self.mw_class_cores.get_cor_branca(),
             
             )
         
