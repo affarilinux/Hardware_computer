@@ -74,10 +74,6 @@ class ListaContainer(WidgetContainer):
         # class container
         return self.wdg_container
 
-    def set_calculo_stack(self,valor):
-        
-        self.mw_class_stack_pc.set_calculo(valor)
-
     def get_stack(self):
         
         return self.mw_class_stack_pc.get_stack()

@@ -1,55 +1,36 @@
-#programas.sys_processador
-from programas.sys_processador.Get_processador import Get_processador
 
-
-#mainwindows
-from mainwindows.front_enter import FrontEnter
-
+# memoria.processador
+from memoria.processador import MemoriaProcessador
+# externos.processador
+from externo.processador import ExternoProcessador
 
 
 class ExeProcessador:
 
-    porcentagem = {
-        "status":False,
-        "porcentagem":0
-    }
-
-
     def __init__(self):
 
-        var_get_porcentagem = GetProcessador()
+        self.sys_class_memoria_processador = MemoriaProcessador()
 
-        
+        self.sys_class_exe_processador = ExternoProcessador()
 
-    
-    def porcentagem(self,porc):
+    def exe_loop(self):
+        """
+        atualizacao de lista pelo loop
+        """
 
-        
-        var_porcentagem = porc.get_porcentagem()
+        __var_lista = []
 
-        if var_porcentagem == False:
+        __var_status_valor = self.sys_class_exe_processador.get_porcentagem_cpu()
 
-            self.porcentagem = {
-                "status":False,
-                "porcentagem":0
-            }
+        if __var_status_valor[0] == True:
 
-        elif var_porcentagem != False:
-            
-            self.porcentagem = {
-                "status":True,
-                "porcentagem":var_porcentagem
-            }
+            __var_lista.append(True)
+            __var_lista.append(__var_status_valor[1])
 
-    def exe_porcentagem_processador(self):
-        
-        if self.porcentagem["status"] == True:
+        elif __var_status_valor[0] == False:
 
-            FrontEnter.set_porcentagem_cpu(self.porcentagem["porcentagem"])
-        
+            __var_lista.append(False)
+            __var_lista.append(0)
 
-    
-        
-        
-
-        
+        self.sys_class_memoria_processador.set_status(__var_lista[0])
+        self.sys_class_memoria_processador.set_porcentagem(__var_lista[1])

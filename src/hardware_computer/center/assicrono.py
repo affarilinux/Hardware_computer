@@ -1,35 +1,20 @@
-import asyncio
 
+# core
 from core.ultils.pag import Pagina
 
-#mainwindows
-from mainwindows.manager import Manager
+# backend correspondente
+# Ajuste o import conforme sua estrutura de pastas
+from center.back_assicrono import BackAssincrono
+
 
 class Assicrono:
 
-    def __init__(self):
+    def __init__(self) -> None:
+        self.backend = BackAssincrono()
 
-        #def __meu_loop()
-        self.var_manager = Manager()
-    
-       
     def sistema_assincrono(self):
-
         self.__ativar_loop()
-    
-    # Função assíncrona para o loop em segundo plano
-    async def __meu_loop(self):
-        
-        while True:
-            
-            self.var_manager.gerenciar_pagina()
-           
-            # Pausa assíncrona para não travar a interface
-            await asyncio.sleep(1)
-
-    # Executa a tarefa assíncrona na página
 
     def __ativar_loop(self):
-
-        Pagina.getpag().run_task(self.__meu_loop)
-        
+        # Passa a função assíncrona diretamente para o run_task do Flet
+        Pagina.getpag().run_task(self.backend.iniciar_loop_background)

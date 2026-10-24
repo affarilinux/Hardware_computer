@@ -4,9 +4,6 @@ from dataclasses import dataclass
 #mainwindows.core
 from mainwindows.core.cores import Cores
 
-#mainwindows.front_enter
-from mainwindows.front_enter import FrontEnter
-
 #core.ultils
 from core.ultils.pag import Pagina
 
@@ -73,11 +70,28 @@ class StackProcessadorWidget:
 
     
 class StackProcessador(StackProcessadorWidget):
+
+    _instancia = None
+
+    def __init__(self):
+        super().__init__()
+        # Salva a instância atual na variável global da classe
+        StackProcessador._instancia = self
+
+    @classmethod
+    def get_instancia(cls):
+        """
+        Retorna a instância ativa de StackProcessador de qualquer lugar do sistema.
+        """
+        return cls._instancia
     
     def get_stack(self):
         return self.WDG_STACK
 
     def set_calculo(self, valor):
+        
 
-        self.WDG_CLASS_TEXT.value = valor
+        self.WDG_CLASS_TEXT.value = str(round(valor,2)) + "%"
         Pagina.getpag().update()
+       
+            

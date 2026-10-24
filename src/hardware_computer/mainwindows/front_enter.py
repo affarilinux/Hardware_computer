@@ -1,15 +1,20 @@
+# mainwindows
+from mainwindows.ui.processador.stack import StackProcessador
+
+# mamorias
+from memoria.processador import MemoriaProcessador
+
 
 class FrontEnter:
 
-    porcentagem_cpu = 0
-        
+    def atalizar_processador_porcentagem(self):
+        # Lógica para atualizar a porcentagem do processador
 
-    @classmethod
-    def get_porcentagem_cpu(cls):
-        return cls.porcentagem_cpu
+        stack_proc = StackProcessador.get_instancia()
+        if stack_proc:
 
-    @classmethod
-    def set_porcentagem_cpu(cls,porcentaje):
-        cls.porcentagem_cpu = porcentaje
-
-    
+            mm_class_var_porcentagem = MemoriaProcessador()
+            var_pc = mm_class_var_porcentagem.get_lista()[0]["porcentagem"]
+            stack_proc.set_calculo(
+                var_pc
+            )
