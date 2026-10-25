@@ -1,19 +1,33 @@
 from flet import Text, FontWeight
 
-from mainwindows.core.mw_class_cores import mw_class_cores
+from mainwindows.core.cores import Cores
 
-class FrontStatics:
+
+class ConfigStatics:
+
+    FW_X = FontWeight.W_500
+    SIZE = 23
+
+    def peso_fonte(self):
+        return self.FW_X
+
+    def fc_size(self):
+        return self.SIZE
+
+
+class FrontStatics(ConfigStatics):
 
     def __init__(self):
-        self.mw_class_cores = mw_class_cores()
+        self.mw_class_cores = Cores()
 
     def text_processador(self):
-        
+
         return Text(
-            "PROCESSADOR", 
-            size=25, 
-            weight=FontWeight.W_600,
+            "PROCESSADOR",
+            # tamanho da fonte
+            size=self.fc_size(),
+            # peso da fonte
+            weight=self.peso_fonte(),
             color=self.mw_class_cores.get_cor_branca(),
-            
-            )
-        
+
+        )

@@ -1,4 +1,7 @@
-from flet import GridView,Container,Colors,Alignment,Text
+from flet import GridView, Container, Colors, Alignment, Text
+
+# core.ultils
+from core.ultils.pag import Pagina
 
 
 class WidgetGrid:
@@ -14,12 +17,12 @@ class WidgetGrid:
         self.__espacos()
         self.__dimensao()
         self.__visible()
-    
+
     def __contagem(self):
 
         self.wdg_gridview.runs_count = 3
         self.wdg_gridview.run_spacing = 10
-        
+
     def __espacos(self):
 
         self.wdg_gridview.spacing = 10
@@ -33,32 +36,44 @@ class WidgetGrid:
 
         self.wdg_gridview.visible = False
 
-    def add_widget(self,numero):
+    def add_widget(self, numero):
+        self.wdg_gridview.controls.append(self._criar_widget(numero))
+        Pagina.getpag().update()
 
-        self.wdg_gridview.controls.append(
-            Container(
-                    content=Text(f"Widget {numero}"),
-                    bgcolor=Colors.BLUE_GREY_800,
-                    border_radius=10,
-                    alignment=Alignment.CENTER,
-                )
+    def _criar_widget(self, numero):
+        return Container(
+            content=Text(str(numero)),
+            bgcolor=Colors.BLUE_GREY_800,
+            border_radius=10,
+            alignment=Alignment.CENTER,
         )
-        
+
 
 class GridProcessador(WidgetGrid):
 
+    _instancia = None
+
     def __init__(self):
         super().__init__()
+        GridProcessador._instancia = self
 
-        self.for_processadores()
+    @classmethod
+    def get_instancia(cls):
+        return cls._instancia
 
-    def for_processadores(self):
+    def for_processadores(self, processadores):
 
-       
-        for i in range(6):
+        controles = self.wdg_gridview.controls
 
-            self.add_widget(i+1)
-                
+        for indice, valor in enumerate(processadores):
+            if indice < len(controles):
+                controles[indice].content.value = str(valor)
+            else:
+                controles.append(self._criar_widget(valor))
+
+        # Mantém no grid somente os controles correspondentes aos núcleos atuais.
+        del controles[len(processadores):]
+        Pagina.getpag().update()
+
     def get_grid(self):
         return self.wdg_gridview
-        

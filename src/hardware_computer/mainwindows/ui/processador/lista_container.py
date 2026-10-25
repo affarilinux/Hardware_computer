@@ -22,7 +22,7 @@ class WidgetContainer:
 
         self.__alignment()
 
-        self.__cor_fundo_container()
+        #self.__cor_fundo_container()
     
     def __tamanho_container(self):
         #largura
@@ -36,8 +36,8 @@ class WidgetContainer:
     def __alignment(self):
         self.wdg_container.alignment = Alignment.CENTER
 
-    def __cor_fundo_container(self):
-        self.wdg_container.bgcolor = Colors.SURFACE_CONTAINER_HIGHEST
+    '''def __cor_fundo_container(self):
+        self.wdg_container.bgcolor = Colors.SURFACE_CONTAINER_HIGHEST'''
 
     def content(self,stack,grid):
         self.wdg_container.content = Stack(

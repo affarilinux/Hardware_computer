@@ -1,18 +1,19 @@
-from flet import Text,FontWeight,Stack,ProgressRing,Container,Alignment
+from flet import Text, FontWeight, Stack, ProgressRing, Container, Alignment
 from dataclasses import dataclass
 
-#mainwindows.core
+# mainwindows.core
 from mainwindows.core.cores import Cores
 
-#core.ultils
+# core.ultils
 from core.ultils.pag import Pagina
+
 
 @dataclass
 class config:
     CENTO_E_TRINTA = 130
-    
-    width : int = CENTO_E_TRINTA
-    height : int = CENTO_E_TRINTA
+
+    width: int = CENTO_E_TRINTA
+    height: int = CENTO_E_TRINTA
 
 
 class StackProcessadorWidget:
@@ -21,13 +22,12 @@ class StackProcessadorWidget:
 
         self.WDG_STACK = Stack()
 
-        #config
+        # config
         self.MW_CLASS_DC_CONFIG = config()
-        #cores
+        # cores
         self.cores = Cores()
 
         self.ativar_funcoes()
-
 
     def ativar_funcoes(self):
         self.__controls()
@@ -38,13 +38,13 @@ class StackProcessadorWidget:
             self.__progresso(),
             self.__container(),
         ]
-        
+
     def __progresso(self):
         self.WDG_CLASS_PROGRESSRING = ProgressRing(
-        value=0.75,       # 75%
-        width=self.MW_CLASS_DC_CONFIG.width,
-        height=self.MW_CLASS_DC_CONFIG.height,
-        stroke_width=8,
+            # value=0.75,       # 75%
+            width=self.MW_CLASS_DC_CONFIG.width,
+            height=self.MW_CLASS_DC_CONFIG.height,
+            stroke_width=8,
         )
 
         return self.WDG_CLASS_PROGRESSRING
@@ -59,16 +59,16 @@ class StackProcessadorWidget:
 
     def __texto(self):
         self.WDG_CLASS_TEXT = Text(
-           
-            weight=FontWeight.W_900, #grosura da letra
+
+            weight=FontWeight.W_900,  # grosura da letra
             color=self.cores.get_cor_branca(),
-            size=25 # tamanho da letra
-            
+            size=25  # tamanho da letra
+
         )
 
         return self.WDG_CLASS_TEXT
 
-    
+
 class StackProcessador(StackProcessadorWidget):
 
     _instancia = None
@@ -84,14 +84,16 @@ class StackProcessador(StackProcessadorWidget):
         Retorna a instância ativa de StackProcessador de qualquer lugar do sistema.
         """
         return cls._instancia
-    
+
     def get_stack(self):
         return self.WDG_STACK
 
     def set_calculo(self, valor):
-        
 
-        self.WDG_CLASS_TEXT.value = str(round(valor,2)) + "%"
+        self.WDG_CLASS_TEXT.value = str(round(valor, 2)) + "%"
+
+        divisor = valor / 100
+        round_divisor = round(divisor, 2)
+        self.WDG_CLASS_PROGRESSRING.value = round_divisor
+
         Pagina.getpag().update()
-       
-            
