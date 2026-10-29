@@ -43,6 +43,9 @@ class Alternador(Widgetalternador, WidgetRow):
     Widgetalternador.__init__(self)
     WidgetRow.__init__(self)
 
+    # A mesma largura do gráfico deixa o botão alinhado à borda direita.
+    self.wdg_row.width = 170
+
     # Posiciona o botão dentro da Row logo na inicialização
     self.add_wdg_row(self.wdg_iconbutton)
     self.alinhamento()

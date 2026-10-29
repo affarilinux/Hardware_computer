@@ -1,14 +1,18 @@
-from flet import GridView, Container, Colors, Alignment, Text
+from flet import GridView, Container, Alignment, Text,Colors
 
 # core.ultils
 from core.ultils.pag import Pagina
+
+#mainwindows
+from mainwindows.core.cores import Cores
 
 
 class WidgetGrid:
 
     def __init__(self):
         self.wdg_gridview = GridView()
-
+        self.cores = Cores()
+        
         self.ativar_funcoes()
 
     def ativar_funcoes(self):
@@ -17,7 +21,7 @@ class WidgetGrid:
         self.__espacos()
         self.__dimensao()
         self.__visible()
-
+        
     def __contagem(self):
 
         self.wdg_gridview.runs_count = 3
@@ -42,10 +46,14 @@ class WidgetGrid:
 
     def _criar_widget(self, numero):
         return Container(
-            content=Text(str(numero)),
+            content=Text(
+                str(numero),
+                color=self.cores.get_cor_branca(),
+                ),
             bgcolor=Colors.BLUE_GREY_800,
             border_radius=10,
             alignment=Alignment.CENTER,
+            
         )
 
 

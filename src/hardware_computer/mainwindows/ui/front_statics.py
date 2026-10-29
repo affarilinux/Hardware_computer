@@ -1,4 +1,5 @@
-from flet import Text, FontWeight
+from flet import Text, FontWeight, Divider, Container, Row
+
 
 from mainwindows.core.cores import Cores
 
@@ -6,7 +7,7 @@ from mainwindows.core.cores import Cores
 class ConfigStatics:
 
     FW_X = FontWeight.W_500
-    SIZE = 23
+    SIZE = 10
 
     def peso_fonte(self):
         return self.FW_X
@@ -22,7 +23,7 @@ class FrontStatics(ConfigStatics):
 
     def text_processador(self):
 
-        return Text(
+        proc = Text(
             "PROCESSADOR",
             # tamanho da fonte
             size=self.fc_size(),
@@ -31,3 +32,31 @@ class FrontStatics(ConfigStatics):
             color=self.mw_class_cores.get_cor_branca(),
 
         )
+
+        row = Row(
+            controls=[proc],
+            alignment="center",
+        )
+
+        return row
+
+    def text_memoria_ram(self):
+
+        return Text(
+            "MEMÓRIA RAM",
+            # tamanho da fonte
+            size=self.fc_size(),
+            # peso da fonte
+            weight=self.peso_fonte(),
+            color=self.mw_class_cores.get_cor_branca(),
+
+        )
+
+    def divider(self):
+
+        return Container(
+            width=150,
+            content=Divider(
+                height=25,
+                color=self.mw_class_cores.get_cor_branca(),
+            ))
