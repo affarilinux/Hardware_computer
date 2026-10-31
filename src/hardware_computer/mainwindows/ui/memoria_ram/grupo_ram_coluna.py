@@ -1,8 +1,9 @@
-from flet import Column, CrossAxisAlignment
+from flet import Column, Container, CrossAxisAlignment
 
 # mainwindows.ui
 from mainwindows.ui.front_statics import FrontStatics
 from mainwindows.ui.memoria_ram.stack_ram import StackRam
+from mainwindows.ui.memoria_ram.uso_ram import UsoRam
 
 
 class Coluna:
@@ -16,6 +17,7 @@ class Coluna:
         )
         self.mn_class_front_statics = FrontStatics()
         self.ct_class_stack_ram = StackRam()
+        self.mn_class_usoram = UsoRam()
 
     def controls_column_adicionar(self, controls):
 
@@ -36,6 +38,13 @@ class GrupoRamColuna(Coluna):
     def __adicionar_controls(self):
 
         # função esterna
+
+        self.controls_column_adicionar(
+            self.mn_class_usoram.top_Row()
+        )
+        # Compensa a altura menor da linha de uso da RAM em relação ao botão
+        # de alternância do processador, alinhando os dois gráficos e divisores.
+        self.controls_column_adicionar(Container(height=23 ))
         self.controls_column_adicionar(
             self.ct_class_stack_ram.get_stack()
         )

@@ -13,6 +13,7 @@ class RAM:
 
         try:
 
+            self.memoria = psutil.virtual_memory()
             total_memoria = self.memoria.total
             __var_total_memoria = [True, total_memoria]
 
@@ -28,6 +29,7 @@ class RAM:
 
         try:
 
+            self.memoria = psutil.virtual_memory()
             memoria_usada = self.memoria.used
             __var_memoria_usada = [True, memoria_usada]
 

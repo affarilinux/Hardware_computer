@@ -1,9 +1,14 @@
 # mainwindows
+# processador
 from mainwindows.ui.processador.stack import StackProcessador
 from mainwindows.ui.processador.grid import GridProcessador
+# ram
+from mainwindows.ui.memoria_ram.stack_ram import StackRam
+from mainwindows.ui.memoria_ram.uso_ram import UsoRam
 
 # mamorias
 from memoria.processador import MemoriaProcessador
+from memoria.ram import MemoriaRam
 
 
 class FrontEnter:
@@ -11,6 +16,7 @@ class FrontEnter:
     def __init__(self) -> None:
 
         self.mm_class_var_porcentagem = MemoriaProcessador()
+        self.mm_class_var_memoria_ram = MemoriaRam()
 
     def atualizar_processador_porcentagem(self):
         # Lógica para atualizar a porcentagem do processador
@@ -37,3 +43,18 @@ class FrontEnter:
             grid_proc_nucleo.for_processadores(
                 var_nc
             )
+
+    def atualizar_memoria_ram(self):
+        # Lógica para atualizar a memória RAM
+
+        dados_ram = self.mm_class_var_memoria_ram.get_lista_ram()[0]
+        uso_ram = UsoRam.get_instancia()
+        if uso_ram:
+            uso_ram.atualizar_total_ram(
+                dados_ram["memoria_usada"],
+                dados_ram["total_memoria"],
+            )
+
+        stack_ram = StackRam.get_instancia()
+        if stack_ram:
+            stack_ram.set_calculo(dados_ram["porcentagem"])
