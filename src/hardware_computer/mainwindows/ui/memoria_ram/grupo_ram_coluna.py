@@ -44,7 +44,7 @@ class GrupoRamColuna(Coluna):
         )
         # Compensa a altura menor da linha de uso da RAM em relação ao botão
         # de alternância do processador, alinhando os dois gráficos e divisores.
-        self.controls_column_adicionar(Container(height=23 ))
+        self.controls_column_adicionar(Container(height=0 ))
         self.controls_column_adicionar(
             self.ct_class_stack_ram.get_stack()
         )

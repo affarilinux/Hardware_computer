@@ -1,5 +1,5 @@
 
-name: Local Agent
+name: Main Config
 version: 1.0.0
 schema: v1
 
@@ -7,14 +7,12 @@ models:
   - name: Qwen Autocomplete 1.5B
     provider: ollama
     model: qwen2.5-coder:1.5b
-    apiBase: http://localhost:11434
     roles:
       - autocomplete
 
   - name: Qwen Chat 7B
     provider: ollama
     model: qwen2.5-coder:7b
-    apiBase: http://localhost:11434
     roles:
       - chat
       - edit
