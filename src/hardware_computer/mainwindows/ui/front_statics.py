@@ -52,6 +52,18 @@ class FrontStatics(ConfigStatics):
 
         )
 
+    def Text_bateria(self):
+
+        return Text(
+            "BATERIA",
+            # tamanho da fonte
+            size=self.fc_size(),
+            # peso da fonte
+            weight=self.peso_fonte(),
+            color=self.mw_class_cores.get_cor_branca(),
+
+        )
+
     def divider(self):
 
         return Container(

@@ -1,13 +1,14 @@
 from flet import Column
 
 from mainwindows.ui.memoria_ram.grupo_ram_coluna import GrupoRamColuna
-
+from mainwindows.ui.bateria.grupo_bateria import GrupoBateria
 
 class ColunaManageresquerda:
 
     def __init__(self):
 
         self.mw_class_grupo_coluna = GrupoRamColuna()
+        self.mw_class_grupobateria = GrupoBateria()
 
         self.colunas()
 
@@ -16,6 +17,7 @@ class ColunaManageresquerda:
         self.wid_coluna = Column(
             controls=[
                 self.mw_class_grupo_coluna.get_widget_grupo_coluna(),
+                self.mw_class_grupobateria.get_widget_grupo_coluna()
             ]
         )
 

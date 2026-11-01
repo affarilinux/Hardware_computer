@@ -5,6 +5,7 @@ from sistemas.exe_processador import ExeProcessador
 from sistemas.exe_ram import ExeRam
 # conjunto de classes
 from sistemas.exe_temperatura import ExeTemperatura
+from sistemas.sys_bateria import SysBateria
 
 # mainwindows
 from mainwindows.front_enter import FrontEnter
@@ -17,6 +18,7 @@ class BackAssincrono:
         self.sys_class_exe_ram = ExeRam()
         self.sys_class_exe_temperatura = ExeTemperatura()
         self.front_enter = FrontEnter()
+        self.sys_class_bateria = SysBateria()
 
         # contagem de ciclos
         self.count = 0
@@ -28,6 +30,7 @@ class BackAssincrono:
             self._executar__uso_por_nucleo()
             self._executar_ram_porcentagem()
             self.__executar_temperatura_wifi()
+            self.__executar_bateria()
 
             # Gerencia a contagem de ciclos
             self.__count_ciclos()
@@ -61,6 +64,13 @@ class BackAssincrono:
             self.front_enter.atualizar_temperatura_placa_mae()
             self.front_enter.atualizar_temperatura_perifericos()
             self.front_enter.atualizar_temperatura_cpu_media()
+
+    def __executar_bateria(self):
+
+        """Gerencia a contagem de ciclos e aciona a bateria e a UI."""
+        if self.count == 0:
+            self.sys_class_bateria.exe_loop()
+            self.front_enter.atualizar_bateria()
 
     def __count_ciclos(self):
         """Gerencia a contagem de ciclos para determinar quando executar ações."""

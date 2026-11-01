@@ -7,13 +7,17 @@ from mainwindows.ui.memoria_ram.stack_ram import StackRam
 from mainwindows.ui.memoria_ram.uso_ram import UsoRam
 from mainwindows.ui.temperatura.linha_1 import Linha1
 from mainwindows.ui.temperatura.linha_2 import Linha2
+# temperatura
 from mainwindows.ui.temperatura.cpu_temp import CpuTemp
+# bateria
+from mainwindows.ui.bateria.stack_batery import StackBateria
 
 # mamorias
 from memoria.processador import MemoriaProcessador
 from memoria.ram import MemoriaRam
 from memoria.temperatura import (MnPerifericos, MnPlacaMae,
                                  Temperaturawifi, MnCpu)
+from memoria.mem_bateria import MemoriaBateria
 
 
 class FrontEnter:
@@ -27,6 +31,7 @@ class FrontEnter:
         self.mm_class_temperatura_placa_mae = MnPlacaMae()
         self.mm_class_perifericos = MnPerifericos()
         self.mn_class_cpu = MnCpu()
+        self.mm_class_bateria = MemoriaBateria()
 
     def atualizar_processador_porcentagem(self):
         # Lógica para atualizar a porcentagem do processador
@@ -104,3 +109,13 @@ class FrontEnter:
 
         if cpu_temp:
             cpu_temp.set_cpu_temperatura_media(temperatura_cpu_media)
+
+    def atualizar_bateria(self):
+        # Lógica para atualizar a bateria
+
+        dados_bateria = self.mm_class_bateria.get_bateria()[
+            "porcentagem"]
+
+        stack_bateria = StackBateria.get_instancia()
+        if stack_bateria:
+            stack_bateria.set_calculo(dados_bateria)
