@@ -1,6 +1,8 @@
+from unittest import result
+
 from externo.temperatura import Temperatura
 from memoria.temperatura import (Temperaturawifi, MnPlacaMae,
-                                 MnPerifericos)
+                                 MnPerifericos, MnCpu)
 
 
 class WifiTemp:
@@ -38,12 +40,20 @@ class PlacaMaeTemp:
             status_pm = True
             valor = status_valor_pm[1]
 
+            soma = 0
+            media = 0
+            for result in valor:
+                soma += result
+            media = round(soma / len(valor), 2)
+
         else:
             status_pm = False
-            valor = 0
+            valor = []
+            media = 0
 
         self.var_temperatura_placa_mae.set_status_mn(status_pm)
-        self.var_temperatura_placa_mae.set_temperatura(valor)
+        self.var_temperatura_placa_mae.set_temperatura_media(media)
+        self.var_temperatura_placa_mae.set_list_temperatura(valor)
 
 
 class PerifericosTemp:
@@ -67,7 +77,35 @@ class PerifericosTemp:
         self.var_temperatura_perifericos.set_temperatura(valor)
 
 
-class ExeTemperatura(WifiTemp, PlacaMaeTemp, PerifericosTemp):
+class CpuTemp:
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.var_temperatura_cpu = MnCpu()
+
+    def cpu_temperatura(self):
+        status_valor_cpu = self.sys_class_exetemperatura.temperatura_cpu()
+
+        if status_valor_cpu[0]:  # Em Python, não precisa testar '== True'
+            status_cpu = True
+            valor = status_valor_cpu[1]
+
+            soma = 0
+            media = 0
+            for result in valor:
+                soma += result
+            media = round(soma / len(valor), 2)
+
+        else:
+            status_cpu = False
+            valor = []
+            media = 0
+        self.var_temperatura_cpu.set_status_cpu(status_cpu)
+        self.var_temperatura_cpu.set_temperatura_media(media)
+        self.var_temperatura_cpu.set_lista_temperatura(valor)
+
+
+class ExeTemperatura(WifiTemp, PlacaMaeTemp, PerifericosTemp, CpuTemp):
 
     def __init__(self) -> None:
         super().__init__()
@@ -81,3 +119,4 @@ class ExeTemperatura(WifiTemp, PlacaMaeTemp, PerifericosTemp):
         self.wifi_temperatura()
         self.placa_mae_temperatura()
         self.perifericos_temperatura()
+        self.cpu_temperatura()

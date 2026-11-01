@@ -21,21 +21,24 @@ class MnPlacaMae:
 
     _placa_mae = {
         "status": False,
-
-        "temperatura": 0
+        "list_temperatura": [],
+        "temperatura_media": 0
     }
 
     def set_status_mn(self, status: bool):
         self._placa_mae["status"] = status
-        
 
-    def set_temperatura(self, temperatura: float):
+    def set_temperatura_media(self, temperatura_media: float):
 
-        self._placa_mae["temperatura"] = temperatura
+        self._placa_mae["temperatura_media"] = temperatura_media
+
+    def set_list_temperatura(self, list_temperatura: list):
+        self._placa_mae["list_temperatura"] = list_temperatura
 
     def get_placa_mae_mn(self):
 
         return self._placa_mae
+
 
 class MnPerifericos:
 
@@ -53,3 +56,25 @@ class MnPerifericos:
     def get_perifericos(self):
 
         return self._perifericos
+
+
+class MnCpu:
+
+    _cpu = {
+        "status": False,
+        "temperatura": [],
+        "temperatura_media": 0
+    }
+
+    def set_status_cpu(self, status: bool):
+        self._cpu["status"] = status
+
+    def set_temperatura_media(self, temperatura_media: float):
+        self._cpu["temperatura_media"] = temperatura_media
+
+    def set_lista_temperatura(self, lista_temperatura: list):
+        self._cpu["temperatura"] = lista_temperatura
+
+    def get_cpu(self):
+
+        return self._cpu

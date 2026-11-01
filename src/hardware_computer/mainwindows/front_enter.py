@@ -12,8 +12,8 @@ from mainwindows.ui.temperatura.cpu_temp import CpuTemp
 # mamorias
 from memoria.processador import MemoriaProcessador
 from memoria.ram import MemoriaRam
-from memoria.temperatura import MnPerifericos, MnPlacaMae, Temperaturawifi
-from teste import temperatura
+from memoria.temperatura import (MnPerifericos, MnPlacaMae,
+                                 Temperaturawifi, MnCpu)
 
 
 class FrontEnter:
@@ -22,11 +22,11 @@ class FrontEnter:
 
         self.mm_class_var_porcentagem = MemoriaProcessador()
         self.mm_class_var_memoria_ram = MemoriaRam()
-        #conjunto de classes
+        # conjunto de classes
         self.mm_class_temperatura_wifi = Temperaturawifi()
         self.mm_class_temperatura_placa_mae = MnPlacaMae()
         self.mm_class_perifericos = MnPerifericos()
-        self.cpu_temp = CpuTemp()
+        self.mn_class_cpu = MnCpu()
 
     def atualizar_processador_porcentagem(self):
         # Lógica para atualizar a porcentagem do processador
@@ -69,7 +69,6 @@ class FrontEnter:
         if stack_ram:
             stack_ram.set_calculo(dados_ram["porcentagem"])
 
-
     def atualizar_temperatura_wifi(self):
         # Lógica para atualizar a temperatura do Wi-Fi
 
@@ -83,10 +82,10 @@ class FrontEnter:
         # Lógica para atualizar a temperatura da placa mãe
 
         temperatura_placa_mae = self.mm_class_temperatura_placa_mae.get_placa_mae_mn()[
-            "temperatura"]
+            "temperatura_media"]
         linha1 = Linha1.get_instancia()
         if linha1:
-            linha1.set_placa_mae_temperatura(temperatura_placa_mae)
+            linha1.set_placa_mae_temperatura_media(temperatura_placa_mae)
 
     def atualizar_temperatura_perifericos(self):
         # Lógica para atualizar a temperatura dos periféricos
@@ -99,7 +98,9 @@ class FrontEnter:
 
     def atualizar_temperatura_cpu_media(self):
 
-        temperatura_cpu_media = temperatura.get_cpu_temperatura()[0][
+        temperatura_cpu_media = self.mn_class_cpu.get_cpu()[
             "temperatura_media"]
+        cpu_temp = CpuTemp.get_instancia()
 
-
+        if cpu_temp:
+            cpu_temp.set_cpu_temperatura_media(temperatura_cpu_media)

@@ -60,6 +60,7 @@ class BackAssincrono:
             self.front_enter.atualizar_temperatura_wifi()
             self.front_enter.atualizar_temperatura_placa_mae()
             self.front_enter.atualizar_temperatura_perifericos()
+            self.front_enter.atualizar_temperatura_cpu_media()
 
     def __count_ciclos(self):
         """Gerencia a contagem de ciclos para determinar quando executar ações."""

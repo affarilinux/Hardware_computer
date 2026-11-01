@@ -55,7 +55,7 @@ class Linha1:
         self.wdg_wifi.value = f"WIFI: {temperatura} ºC"
         self.wdg_wifi.update()
 
-    def set_placa_mae_temperatura(self, temperatura):
+    def set_placa_mae_temperatura_media(self, temperatura):
 
         self.wdg_placamae.value = f"PLACA: {temperatura} ºC"
         self.wdg_placamae.update()
