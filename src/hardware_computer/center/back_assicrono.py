@@ -9,6 +9,7 @@ from sistemas.sys_bateria import SysBateria
 
 # mainwindows
 from mainwindows.front_enter import FrontEnter
+from mainwindows.ui.data.data_app import DataApp
 
 
 class BackAssincrono:
@@ -26,6 +27,7 @@ class BackAssincrono:
     async def iniciar_loop_background(self):
         """Loop principal executado em segundo plano a cada 1 segundo."""
         while True:
+            DataApp.atualizar_instancia()
             self._executar__processador_porcentagem()
             self._executar__uso_por_nucleo()
             self._executar_ram_porcentagem()

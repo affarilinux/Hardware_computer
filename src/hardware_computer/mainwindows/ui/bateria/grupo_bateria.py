@@ -1,7 +1,8 @@
-from flet import Column, CrossAxisAlignment
+from flet import Column, CrossAxisAlignment, Container, Stack, Alignment
 
 # mainwindows.ui
 from mainwindows.ui.bateria.stack_batery import StackBateria
+from mainwindows.ui.bateria.botao_batery import BotaoBateria
 from mainwindows.ui.front_statics import FrontStatics
 
 
@@ -17,6 +18,7 @@ class Coluna:
 
         self.mw_class_frontstatics = FrontStatics()
         self.mw_class_stackbateria = StackBateria()
+        self.mw_class_botaobateria = BotaoBateria()
 
     def controls_column_adicionar(self, controls):
 
@@ -41,8 +43,24 @@ class GrupoBateria(Coluna):
             self.mw_class_stackbateria.get_stack()
         )
         self.controls_column_adicionar(
-            self.mw_class_frontstatics.Text_bateria()
-
+            Stack(
+                width=150,
+                height=20,
+                controls=[
+                    Container(
+                        content=self.mw_class_frontstatics.Text_bateria(),
+                        width=150,
+                        height=20,
+                        alignment=Alignment.CENTER,
+                    ),
+                    Container(
+                        content=self.mw_class_botaobateria.get_botao(),
+                        width=150,
+                        height=20,
+                        alignment=Alignment.CENTER_RIGHT,
+                    ),
+                ],
+            )
         )
 
         self.controls_column_adicionar(

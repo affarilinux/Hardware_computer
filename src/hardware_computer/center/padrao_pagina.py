@@ -8,7 +8,7 @@ class PadraoPagina:
         # largura
         pagina.window.width = 500
         # altura
-        pagina.window.height = 768
+        pagina.window.height = 600
 
     def cor_fundo_pagina(self, page):
 

@@ -11,6 +11,7 @@ from mainwindows.ui.temperatura.linha_2 import Linha2
 from mainwindows.ui.temperatura.cpu_temp import CpuTemp
 # bateria
 from mainwindows.ui.bateria.stack_batery import StackBateria
+from mainwindows.ui.bateria.botao_batery import BotaoBateria
 
 # mamorias
 from memoria.processador import MemoriaProcessador
@@ -117,5 +118,11 @@ class FrontEnter:
             "porcentagem"]
 
         stack_bateria = StackBateria.get_instancia()
+        botao_bateria = BotaoBateria.get_instancia()
+        if botao_bateria:
+            botao_bateria.set_carregando(
+                self.mm_class_bateria.get_bateria().get("carregando", False)
+            )
+
         if stack_bateria:
             stack_bateria.set_calculo(dados_bateria)
