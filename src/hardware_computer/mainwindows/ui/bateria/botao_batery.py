@@ -1,8 +1,9 @@
-import flet as ft
+from flet import Icon,Icons,Container,Alignment
+from core.ultils.pag import Pagina
 
 
 class BotaoBateria:
-    """Indicador circular de carregamento da bateria."""
+    """Ícone da bateria que indica carga e estado de carregamento."""
 
     _instancia = None
 
@@ -12,11 +13,15 @@ class BotaoBateria:
     def __init__(self):
         self.carregando = False
         self._indice_cor = 0
-        self.wdg_botao = ft.Container(
-            width=12,
-            height=12,
-            bgcolor=self.COR_DESCARREGANDO,
-            border_radius=6,
+        self.wdg_botao = Container(
+            content=Icon(
+                icon=Icons.BATTERY_0_BAR,
+                size=24,
+                color=self.COR_DESCARREGANDO,
+            ),
+            width=30,
+            height=30,
+            alignment=Alignment.CENTER,
         )
         BotaoBateria._instancia = self
 
@@ -30,8 +35,15 @@ class BotaoBateria:
     def set_carregando(self, carregando: bool):
         self.carregando = bool(carregando)
         if self.carregando:
-            self.wdg_botao.bgcolor = self.CORES_CARREGANDO[self._indice_cor]
+            cor = self.CORES_CARREGANDO[self._indice_cor]
             self._indice_cor = 1 - self._indice_cor
+            self.wdg_botao.content.icon = Icons.BATTERY_CHARGING_FULL
+            self.wdg_botao.content.color = cor
         else:
             self._indice_cor = 0
-            self.wdg_botao.bgcolor = self.COR_DESCARREGANDO
+            self.wdg_botao.content.icon = Icons.BATTERY_0_BAR
+            self.wdg_botao.content.color = self.COR_DESCARREGANDO
+
+        pagina = Pagina.getpag()
+        if pagina is not None:
+            pagina.update()

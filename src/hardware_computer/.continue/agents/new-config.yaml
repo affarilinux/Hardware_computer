@@ -10,9 +10,9 @@ models:
     roles:
       - autocomplete
 
-  - name: Qwen Chat 7B
+  - name: Qwen Chat 1.5B
     provider: ollama
-    model: qwen2.5-coder:7b
+    model: qwen2.5-coder:1.5b
     roles:
       - chat
       - edit

@@ -79,7 +79,7 @@ class StackProcessadorWidget:
             value="0.0%",
             weight=ft.FontWeight.W_900,
             color=self.cores.get_cor_branca(),
-            size=25,
+            size=20,
         )
 
         self.WDG_CONTAINER = ft.Container(
