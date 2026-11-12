@@ -13,6 +13,9 @@ from mainwindows.ui.data.data_app import DataApp
 
 #externo
 from externo.ex_bateria import ExBateria
+from janelasecundaria.ui.configuracoes.temporizador_ciclos import (
+    TemporizadorCiclos,
+)
 
 
 class BackAssincrono:
@@ -51,7 +54,8 @@ class BackAssincrono:
     def _executar__uso_por_nucleo(self):
         """Gerencia a contagem de ciclos e aciona o uso por núcleo e a UI."""
         if self.count == 0:
-            self.sys_class_exe_processador.exe_loop()
+            # exe_loop já foi executado em _executar__processador_porcentagem,
+            # atualizando em conjunto a porcentagem total e a de cada núcleo.
             self.front_enter.atualizar_uso_por_nucleo()
 
     def _executar_ram_porcentagem(self):
@@ -80,5 +84,6 @@ class BackAssincrono:
     def __count_ciclos(self):
         """Gerencia a contagem de ciclos para determinar quando executar ações."""
         self.count += 1
-        if self.count == 10:
+        intervalo = TemporizadorCiclos.obter_intervalo_segundos()
+        if self.count >= intervalo:
             self.count = 0

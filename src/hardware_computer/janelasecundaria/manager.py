@@ -1,4 +1,4 @@
-from flet import Column
+from flet import Column, CrossAxisAlignment
 
 from janelasecundaria.row_top import RowTop
 
@@ -12,6 +12,8 @@ class ManagerJS:
 
     def _criar_coluna(self):
         self.wdg_coluna = Column(
+            expand=True,
+            horizontal_alignment=CrossAxisAlignment.STRETCH,
             controls=[
                 self.js_class_rowtop.get_row()
             ]

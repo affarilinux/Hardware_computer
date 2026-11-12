@@ -8,7 +8,9 @@ class ExternoProcessador:
 
         try:
 
-            total = psutil.cpu_percent(interval=1)
+            # interval=None usa o intervalo desde a amostra anterior e não
+            # bloqueia a interface enquanto aguarda a próxima leitura.
+            total = psutil.cpu_percent(interval=None)
             __var_porcetagem = [True,total]
 
         except Exception as e:
@@ -23,7 +25,7 @@ class ExternoProcessador:
 
         try:
 
-            uso_por_nucleo = psutil.cpu_percent(interval=1, percpu=True)
+            uso_por_nucleo = psutil.cpu_percent(interval=None, percpu=True)
             __var_uso_por_nucleo = [True,uso_por_nucleo]
 
         except Exception as e:
@@ -31,4 +33,3 @@ class ExternoProcessador:
             __var_uso_por_nucleo = [False,e]
 
         return __var_uso_por_nucleo
-            
