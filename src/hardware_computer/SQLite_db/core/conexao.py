@@ -1,15 +1,14 @@
 import sqlite3
+from pathlib import Path
 
 
 class ConexaoSqlite:
 
     def __string_diretorio(self):
+        # Resolve o banco a partir deste módulo, não do diretório de execução.
+        return Path(__file__).resolve().with_name('hardware.db')
 
-        __var_caminho = 'SQLite_db/core/hardware.db'
-
-        return __var_caminho
-
-    ##with___________________________-----------
+    # with___________________________-----------
 
     def ativar_with(self):
 
@@ -18,12 +17,12 @@ class ConexaoSqlite:
 
             self.withdb = conn.cursor()
 
-    def with_executar_query(self,query):
+    def with_executar_query(self, query):
 
         self.withdb.execute(query)
 
-
     ## banco var#############################
+
     def ativar_banco(self):
 
         self.conexao = sqlite3.connect(self.__string_diretorio())
@@ -38,10 +37,14 @@ class ConexaoSqlite:
         self.cursor.close()
         self.conexao.close()
 
-    def cursor_executar_query(self,query):
+    def cursor_executar_query(self, query):
 
         self.cursor.execute(query)
 
+    def cursor_execute_query_duplo(self, query, lista):
+
+        self.cursor.execute(query, lista)
+
     def select_uma_linha(self):
 
-        self.cursor.fetchone()
+        return self.cursor.fetchone()

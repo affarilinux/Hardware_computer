@@ -10,6 +10,7 @@ from center.padrao_pagina import PadraoPagina
 
 # sqlite
 from SQLite_db.core.composicao import SqliteComposicao
+from SQLite_db.core.checagem import Checagem
 
 
 class AppMain:
@@ -30,14 +31,17 @@ class AppMain:
 
         self.mn_class_sqlite = SqliteComposicao()
         self.mn_class_sqlite.tabelas_criacao()
-    
+
+        mn_class_checagem = Checagem()
+        mn_class_checagem.verificar_tabela()
+
     def __paginas(self):
 
         Pagina.setpag(self.pageinit)
 
         self.ct_class_padrao_pagina = PadraoPagina()
         self.ct_class_padrao_pagina.cor_fundo_pagina(self.pageinit)
-        self.ct_class_padrao_pagina.tamanho_tela(self.pageinit) 
+        self.ct_class_padrao_pagina.tamanho_tela(self.pageinit)
         self.ct_class_padrao_pagina.titulo_pagina(self.pageinit)
 
     def __pagina_init(self):
@@ -45,7 +49,7 @@ class AppMain:
         self.ct_class_index = Index()
         self.ct_class_index.sistema()
 
-    
+
 def main(page: Page) -> None:
 
     AppMain(page)
