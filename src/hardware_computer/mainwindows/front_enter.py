@@ -34,7 +34,26 @@ class FrontEnter:
         self.mn_class_cpu = MnCpu()
         self.mm_class_bateria = MemoriaBateria()
 
-    def atualizar_processador_porcentagem(self):
+    def executar_grupo_funcao(self):
+
+        # direita--
+        # processador
+        self.__atualizar_processador_porcentagem()
+        self.__atualizar_uso_por_nucleo()
+
+        # temperatura
+        self.__atualizar_temperatura_wifi()
+        self.__atualizar_temperatura_placa_mae()
+        self.__atualizar_temperatura_cpu_media()
+        self.__atualizar_temperatura_perifericos()
+
+        # esquerda
+        # ram
+        self._atualizar_memoria_ram()
+        # bateria
+        self.__atualizar_bateria()
+
+    def __atualizar_processador_porcentagem(self):
         # Lógica para atualizar a porcentagem do processador
 
         stack_proc = StackProcessador.get_instancia()
@@ -46,7 +65,7 @@ class FrontEnter:
                 var_pc
             )
 
-    def atualizar_uso_por_nucleo(self):
+    def __atualizar_uso_por_nucleo(self):
         # Lógica para atualizar o uso por núcleo do processador
 
         # Atualiza o grid criado pelo ListaContainer e já exibido no front.
@@ -60,7 +79,7 @@ class FrontEnter:
                 var_nc
             )
 
-    def atualizar_memoria_ram(self):
+    def _atualizar_memoria_ram(self):
         # Lógica para atualizar a memória RAM
 
         dados_ram = self.mm_class_var_memoria_ram.get_lista_ram()[0]
@@ -75,7 +94,7 @@ class FrontEnter:
         if stack_ram:
             stack_ram.set_calculo(dados_ram["porcentagem"])
 
-    def atualizar_temperatura_wifi(self):
+    def __atualizar_temperatura_wifi(self):
         # Lógica para atualizar a temperatura do Wi-Fi
 
         temperatura_wifi = self.mm_class_temperatura_wifi.get_wifi()[
@@ -84,7 +103,7 @@ class FrontEnter:
         if linha1:
             linha1.set_wifi_temperatura(temperatura_wifi)
 
-    def atualizar_temperatura_placa_mae(self):
+    def __atualizar_temperatura_placa_mae(self):
         # Lógica para atualizar a temperatura da placa mãe
 
         temperatura_placa_mae = self.mm_class_temperatura_placa_mae.get_placa_mae_mn()[
@@ -93,7 +112,7 @@ class FrontEnter:
         if linha1:
             linha1.set_placa_mae_temperatura_media(temperatura_placa_mae)
 
-    def atualizar_temperatura_perifericos(self):
+    def __atualizar_temperatura_perifericos(self):
         # Lógica para atualizar a temperatura dos periféricos
 
         temperatura_perifericos = self.mm_class_perifericos.get_perifericos()[
@@ -102,7 +121,7 @@ class FrontEnter:
         if linha2:
             linha2.set_perifericos_temperatura(temperatura_perifericos)
 
-    def atualizar_temperatura_cpu_media(self):
+    def __atualizar_temperatura_cpu_media(self):
 
         temperatura_cpu_media = self.mn_class_cpu.get_cpu()[
             "temperatura_media"]
@@ -111,7 +130,7 @@ class FrontEnter:
         if cpu_temp:
             cpu_temp.set_cpu_temperatura_media(temperatura_cpu_media)
 
-    def atualizar_bateria(self):
+    def __atualizar_bateria(self):
         # Lógica para atualizar a bateria
 
         dados_bateria = self.mm_class_bateria.get_bateria()[
